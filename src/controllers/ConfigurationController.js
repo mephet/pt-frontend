@@ -11,6 +11,35 @@ const ConfigurationController = {
             },
             body: JSON.stringify(json)
         })
+    },
+
+    getConfiguration(projectId) {
+        const url = `http://localhost:5000/api/config/project/${projectId}`;
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(json => {
+            return json;
+        });
+    },
+
+    getLatestSprint(projectId) {
+        let url = Constants.ENDPOINT += `/getsprint/project/${projectId}/`;
+        console.log(url);
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(json => {
+            return json;
+        });
     }
 }
 
