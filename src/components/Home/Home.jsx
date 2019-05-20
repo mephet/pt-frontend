@@ -5,9 +5,10 @@ import TimerUtil from '../../utils/TimerUtil';
 import './Home.css';
 
 class Home extends Component {
+
   constructor(props) {
     super(props);
-    this.projectId = 2345186;
+
     this.state = {
       sprintData: {},
       timeToRelease: 0,
@@ -20,14 +21,15 @@ class Home extends Component {
     this.getCountdownString = this.getCountdownString.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+        sprintData: nextProps.data.sprintData,
+        timeToRelease: Math.floor((new Date(nextProps.data.sprintData.release_date).getTime() - Date.now()) / 1000),
+        timeToReview: Math.floor((new Date(nextProps.data.sprintData.review_date).getTime() - Date.now()) / 1000)
+    })
+}
+
   componentDidMount() {
-    ConfigurationController.getLatestSprint(this.projectId).then(res => {
-      this.setState({
-        sprintData: res.data,
-        timeToRelease: Math.floor((new Date(res.data.release_date).getTime() - Date.now()) / 1000),
-        timeToReview: Math.floor((new Date(res.data.review_date).getTime() - Date.now()) / 1000)
-      })
-    });
     this.startTimer();
   }
 
@@ -54,7 +56,7 @@ class Home extends Component {
               <Card className="sprint-card" bg="info" text="white" style={{ width: '16rem'}}>
                 <Card.Body>
                   <Card.Text>
-                    Sprint {this.state.sprintData.sprint_no}
+                    Sprint { this.props.data.sprintData.sprint_no }
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -63,7 +65,7 @@ class Home extends Component {
           <br />
           <Row>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '18rem'}}>
+              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
                     Next Release Date:
@@ -72,7 +74,7 @@ class Home extends Component {
               </Card>
             </Col>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '18rem'}}>
+              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
                     Next Review Date:
@@ -81,22 +83,42 @@ class Home extends Component {
               </Card>
             </Col>
           </Row>
-          <br />
           <Row>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '18rem'}}>
+              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
-                    {new Date(Date.parse(this.state.sprintData.release_date)).toDateString()}
+                    {new Date(Date.parse(this.props.data.sprintData.release_date)).toDateString()}
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '18rem'}}>
+              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
-                    {new Date(Date.parse(this.state.sprintData.review_date)).toDateString()}
+                    {new Date(Date.parse(this.props.data.sprintData.review_date)).toDateString()}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col>
+              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
+                <Card.Body>
+                  <Card.Text>
+                    Time till Release Date:
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
+                <Card.Body>
+                  <Card.Text>
+                    Time till Review Date:
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -104,7 +126,7 @@ class Home extends Component {
           </Row>
           <Row>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '18rem'}}>
+              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
                     { this.state.countdownRelease }
@@ -113,7 +135,7 @@ class Home extends Component {
               </Card>
             </Col>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '18rem'}}>
+              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
                     { this.state.countdownReview }

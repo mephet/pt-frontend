@@ -2,7 +2,6 @@ import Constants from "../constants";
 
 const ConfigurationController = {
     updateConfigurations(json) {
-        console.log(Constants.ENDPOINT_UPDATE_PATH);
         console.log(JSON.stringify(json));
         fetch(Constants.ENDPOINT_UPDATE_PATH, {
             method: 'POST',
@@ -28,7 +27,8 @@ const ConfigurationController = {
     },
 
     getLatestSprint(projectId) {
-        let url = Constants.ENDPOINT += `/getsprint/project/${projectId}/`;
+        let url = Constants.ENDPOINT;
+        url += `/getsprint/project/${projectId}/`;
         console.log(url);
         return fetch(url, {
             method: 'GET',
