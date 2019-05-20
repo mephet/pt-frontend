@@ -3,7 +3,8 @@ import Configure from './components/Configure/Configure';
 import ConfigurationController from './controllers/ConfigurationController';
 import { Tabs, Tab, Container } from 'react-bootstrap';
 import Home from './components/Home/Home';
-import JBHead from './components/JBHead';
+import JBHead from './components/JBHead/JBHead';
+import SprintInfo from './components/SprintInfo/SprintInfo';
 
 class App extends React.Component {
 
@@ -47,6 +48,9 @@ class App extends React.Component {
           </Tab>
           <Tab eventKey="configure" title="Configure">
             <Configure pid={this.projectId} data={this.state}/>
+          </Tab>
+          <Tab eventKey="sprintinfo" title="Sprint Details">
+            <SprintInfo/>
           </Tab>
         </Tabs>
       </Container>

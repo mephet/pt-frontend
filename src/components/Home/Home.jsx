@@ -53,7 +53,7 @@ class Home extends Component {
            <br />
           <Row>
             <Col>
-              <Card className="sprint-card" bg="info" text="white" style={{ width: '16rem'}}>
+              <Card className="sprint-card" bg="success" text="white" style={{ width: '16rem'}}>
                 <Card.Body>
                   <Card.Text>
                     Sprint { this.props.data.sprintData.sprint_no }
@@ -106,7 +106,7 @@ class Home extends Component {
           <br />
           <Row>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
+              <Card className="date-card" bg="info" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
                     Time till Release Date:
@@ -115,7 +115,7 @@ class Home extends Component {
               </Card>
             </Col>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
+              <Card className="date-card" bg="info" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
                     Time till Review Date:
@@ -126,7 +126,7 @@ class Home extends Component {
           </Row>
           <Row>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
+              <Card className="date-card" bg="info" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
                     { this.state.countdownRelease }
@@ -135,7 +135,7 @@ class Home extends Component {
               </Card>
             </Col>
             <Col>
-              <Card className="date-card" bg="primary" text="white" style={{ width: '20rem'}}>
+              <Card className="date-card" bg="info" text="white" style={{ width: '20rem'}}>
                 <Card.Body>
                   <Card.Text>
                     { this.state.countdownReview }

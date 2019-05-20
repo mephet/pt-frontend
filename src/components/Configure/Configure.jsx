@@ -39,15 +39,21 @@ class Configure extends React.Component {
     }
 
 
-    handleReleaseDateSelection = (date) => {
+    handleReleaseDateSelection = (releaseDate) => {
+        let date = new Date(releaseDate)
+        let userTimezoneOffset = date.getTimezoneOffset() * 60000;
+        let newDate = new Date(date.getTime() - userTimezoneOffset);
         this.setState({
-            releaseDate: date
+            releaseDate: newDate
         })
     }
 
-    handleReviewDateSelection = (date) => {
+    handleReviewDateSelection = (reviewDate) => {
+        let date = new Date(reviewDate)
+        let userTimezoneOffset = date.getTimezoneOffset() * 60000;
+        let newDate = new Date(date.getTime() - userTimezoneOffset);
         this.setState({
-            reviewDate: date
+            reviewDate: newDate
         })
     }
 
