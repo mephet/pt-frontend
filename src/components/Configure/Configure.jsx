@@ -34,26 +34,23 @@ class Configure extends React.Component {
             isChoreTaggingEnabled: nextProps.data.isChoreTaggingEnabled,
             isBugfixTaggingEnabled: nextProps.data.isBugfixTaggingEnabled,
             releaseDate: new Date(nextProps.data.sprintData.release_date),
-            reviewDate: new Date(nextProps.data.sprintData.review_date),
+            reviewDate: new Date(nextProps.data.sprintData.review_date)
         })
+        
     }
 
 
     handleReleaseDateSelection = (releaseDate) => {
         let date = new Date(releaseDate)
-        let userTimezoneOffset = date.getTimezoneOffset() * 60000;
-        let newDate = new Date(date.getTime() - userTimezoneOffset);
         this.setState({
-            releaseDate: newDate
+            releaseDate: date
         })
     }
 
     handleReviewDateSelection = (reviewDate) => {
         let date = new Date(reviewDate)
-        let userTimezoneOffset = date.getTimezoneOffset() * 60000;
-        let newDate = new Date(date.getTime() - userTimezoneOffset);
         this.setState({
-            reviewDate: newDate
+            reviewDate: date
         })
     }
 

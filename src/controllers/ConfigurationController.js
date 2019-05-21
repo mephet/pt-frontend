@@ -13,7 +13,9 @@ const ConfigurationController = {
     },
 
     getConfiguration(projectId) {
-        const url = `http://localhost:5000/api/config/project/${projectId}`;
+        let url = Constants.ENDPOINT;
+        url += `/config/project/${projectId}`;
+        console.log(url);
         return fetch(url, {
             method: 'GET',
             headers: {

@@ -1,6 +1,6 @@
 const Constants = {
-    "ENDPOINT_UPDATE_PATH" : "http://localhost:5000/api/updateconfig",
-    "ENDPOINT": "http://localhost:5000/api",
+    "ENDPOINT_UPDATE_PATH" : "https://pt.mkjmworld.com/api/updateconfig",
+    "ENDPOINT": "https://pt.mkjmworld.com/api",
     "TOGGLE_RELEASE_TAGGING": "TOGGLE_RELEASE_TAGGING",
     "TOGGLE_REVIEW_TAGGING": "TOGGLE_REVIEW_TAGGING",
     "TOGGLE_FEATURE_TAGGING": "TOGGLE_FEATURE_TAGGING",
