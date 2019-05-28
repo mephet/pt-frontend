@@ -51,7 +51,7 @@ class App extends React.Component {
             <Configure pid={this.projectId} data={this.state}/>
           </Tab>
           <Tab eventKey="sprintinfo" title="Sprint Details">
-            <SprintInfo/>
+            <SprintInfo pid={this.projectId} data={this.state}/>
           </Tab>
         </Tabs>
       </Container>
