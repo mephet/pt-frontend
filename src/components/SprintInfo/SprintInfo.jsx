@@ -1,62 +1,55 @@
-import React, { Component } from 'react';
-import ApiHandler from '../../api/apiHandler';
-import {Table} from 'react-bootstrap';
+import React from 'react';
+import ApiHandler from '../../api/ApiHandler';
+
+import SprintInfoTable from './SprintInfoTable';
+import ProjectMembershipUtil from '../../utils/ProjectMemberUtil';
 
 class SprintInfo extends React.Component {
     constructor(props) {
         super(props);
+        
+        this.owners = ['MK', 'SE', 'KR', 'SIB'];
 
-        this.state = {
-            sprintNo: 0,
-            projectId: this.props.pid,
-            stories: []
-        }
+        this.assignOwnerStories = this.assignOwnerStories.bind(this);
+    }
 
-        // this.stories = this.state.stories.map((story, key) => {
-        //     <li key={story.id}>{story.name}</li>
-        // })
+    assignOwnerStories(projectId, sprintNo, owners) {
+        let pArr = owners.map(owner => {
+            return ApiHandler.getStoriesBySprintAndUser(projectId, sprintNo, owner)
+                .then(stories => {
+                    return {owner: owner, stories: stories.stories};
+                });
+        })
+
+        Promise.all(pArr).then(owners => {
+            this.setState({
+                owners: owners 
+            })
+        })
+    
     }
 
     componentWillReceiveProps(nextProps) {
+        let sprintNo = nextProps.data.sprintData.sprint_no;
+        let projectId = nextProps.pid;
+
+        this.assignOwnerStories(projectId, sprintNo, this.owners);
+        
         this.setState({
             sprintNo: nextProps.data.sprintData.sprint_no,
             projectId: nextProps.pid
         })
-
-        ApiHandler.getStoriesBySprintAndUser(this.state.projectId, this.state.sprintNo, 'MA')
-            .then(res => {
-                this.setState({
-                    stories: res.stories.stories
-                })
-            })
+        
     }
 
     render() {
-        return(
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Story Id</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Points</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.stories.map(story => {
-                        return (
-                            <tr>
-                                <td>{story.id}</td>
-                                <td>{story.name}</td>
-                                <td>{story.story_type}</td>
-                                <td>{story.estimate}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-                
-            </Table>
-        ) 
+        if (this.state == null) {
+            return null;
+        } else {
+            return (
+                <SprintInfoTable owners={this.state.owners} />
+            )
+        }
     }
 }
 

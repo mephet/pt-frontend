@@ -2,8 +2,9 @@ import Constants from "../constants";
 
 const ConfigurationController = {
     updateConfigurations(json) {
-        console.log(JSON.stringify(json));
-        fetch(Constants.ENDPOINT_UPDATE_PATH, {
+        let url = Constants.ENDPOINT;
+        url += '/updateconfig';
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

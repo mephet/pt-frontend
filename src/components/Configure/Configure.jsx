@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Row, Col, Form, FormControl, FormGroup } from 'react-bootstrap';
+import { Button, Container, Row, Col, Form, FormGroup } from 'react-bootstrap';
 import Constants from '../../constants';
 import ConfigurationController from '../../controllers/ConfigurationController';
 import DatePicker from 'react-datepicker';

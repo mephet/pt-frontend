@@ -1,12 +1,43 @@
 import Constants from "../constants";
 
 const ApiHandler = {
+    async getProjectDetails(projectId) {
+        let url = Constants.PT_ENDPOINT;
+        url += `/${projectId}`;
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'X-TrackerToken': Constants.PT_API_TOKEN,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(json => {
+            return json
+        });
+    },
 
-    async getStoriesBySprintAndUser(projectId, sprintNo, username) {
+    async getStoriesBySprintAndUser(projectId, sprintNo, ownerName) {
 
         let url = Constants.PT_ENDPOINT;
         url += `/${projectId}/search?query=label:sprint${sprintNo}
-                +AND+owner:${username}`;
+                +AND+owner:${ownerName}`;
+        return fetch(url, {
+            method: "GET",
+            headers: {
+                'X-TrackerToken': Constants.PT_API_TOKEN,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(json => {
+            return json
+        });
+    },
+
+    async getProjectMembers(projectId) {
+        let url = Constants.PT_ENDPOINT;
+        url += `/${projectId}/memberships`;
         console.log(url);
         return fetch(url, {
             method: "GET",
