@@ -40,6 +40,8 @@ function StoryBadgeState({storyState}) {
                     {storyState}
                 </Badge>
             )
+        default:
+            return null;
     }
 }
 

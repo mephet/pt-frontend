@@ -1,6 +1,8 @@
 import React from 'react';
 import {Accordion, Row, Card, Col, Container} from 'react-bootstrap';
 import SprintInfoItem from './SprintInfoItem';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 class SprintInfoTable extends React.Component{
     constructor(props) {
@@ -9,10 +11,16 @@ class SprintInfoTable extends React.Component{
         this.state = {
             userStories: this.props.userStories
         }
+
         console.log(this.state.userStories);
     }
 
-
+    percentageComplete(totalPoints, completedPoints) {
+        let completePercent = Math.round(completedPoints/totalPoints * 100);
+        return (
+            <CircularProgressbar value={completePercent} text={`${completePercent}%`} />
+        )
+    }
     render() {
         if (this.state.userStories == null) {
             return null;
@@ -28,14 +36,22 @@ class SprintInfoTable extends React.Component{
                                         <Card.Body>
                                             <Container>
                                                 <Row>
-                                                    <Col>
-                                                    { owner.stories.total_points }
+                                                    <Col xs={4}>
+                                                    <Container>
+                                                        <Row>
+                                                            <Col>Total points: { owner.stories.total_points }</Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col>Completed points: { owner.stories.total_points_completed }</Col>
+                                                        </Row>
+                                                    </Container>
                                                     </Col>
                                                     <Col>
-                                                    { owner.stories.total_points_completed }
-                                                    </Col>
-                                                    <Col>
-                                                    `{ owner.stories.total_points } / { owner.stories.total_points_completed }`
+                                                        <Container>
+                                                            <Row>
+                                                                <Col xs={2}>{this.percentageComplete(owner.stories.total_points, owner.stories.total_points_completed)}</Col>
+                                                            </Row>
+                                                        </Container>
                                                     </Col>
                                                 </Row>
                                             </Container>

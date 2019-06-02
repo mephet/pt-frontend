@@ -11,8 +11,6 @@ class Home extends Component {
     this.state = {
       sprintData: props.data.sprintData,
       sprintInfo: props.data.sprintInfo,
-      timeToRelease: 0,
-      timeToReview: 0,
       timeToRelease: Math.floor((new Date(props.data.sprintData.release_date).getTime() - Date.now()) / 1000),
       timeToReview: Math.floor((new Date(props.data.sprintData.review_date).getTime() - Date.now()) / 1000)
     }

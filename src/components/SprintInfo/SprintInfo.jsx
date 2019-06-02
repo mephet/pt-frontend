@@ -2,7 +2,6 @@ import React from 'react';
 import ApiHandler from '../../api/ApiHandler';
 
 import SprintInfoTable from './SprintInfoTable';
-import ProjectMembershipUtil from '../../utils/ProjectMemberUtil';
 
 class SprintInfo extends React.Component {
     constructor(props) {
@@ -40,7 +39,7 @@ class SprintInfo extends React.Component {
 
 
     render() {
-        if (this.state == null || this.state.userStories == undefined) {
+        if (this.state === null || this.state.userStories === undefined) {
             return null;
         } else {
             return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import PTConstants from '../../constants/PTConstants';
-import { Badge, Container, Row, Col } from 'react-bootstrap';
+import { Badge, Container, Row } from 'react-bootstrap';
 import StoryBadgeState from './StoryBadgeState';
 
 function StoryBadge({storyState, storyType, points, storyTitle}) {
@@ -18,9 +18,7 @@ function StoryBadge({storyState, storyType, points, storyTitle}) {
                             <StoryBadgeState storyState={storyState} />
                         </h5>
                     </Row>
-                    <Row>
-                        {storyTitle}
-                    </Row>
+                    <Row><h5>{storyTitle}</h5></Row>
                 </Container>
             )
         case PTConstants.STORY_TYPE.CHORE:
@@ -36,9 +34,7 @@ function StoryBadge({storyState, storyType, points, storyTitle}) {
                             <StoryBadgeState storyState={storyState} />
                         </h5>
                     </Row>
-                    <Row>
-                        {storyTitle}
-                    </Row>
+                    <Row><h5>{storyTitle}</h5></Row>
                 </Container>
             )
         case PTConstants.STORY_TYPE.BUGFIX:
@@ -54,11 +50,11 @@ function StoryBadge({storyState, storyType, points, storyTitle}) {
                             <StoryBadgeState storyState={storyState} />
                         </h5>
                     </Row>
-                    <Row>
-                        {storyTitle}
-                    </Row>
+                    <Row><h5>{storyTitle}</h5></Row>
                 </Container>
             )
+        default:
+            return null;
     }
 }
 

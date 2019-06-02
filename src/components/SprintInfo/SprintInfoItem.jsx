@@ -15,8 +15,8 @@ function SprintInfoItem({storyInfo, idx}) {
                 <Accordion.Collapse eventKey={idx}>
                     <Card.Body>
                         <Card.Text>Id: {storyInfo.id}</Card.Text>
-                        <Card.Subtitle>{storyInfo.description}</Card.Subtitle>
-                        <a href={storyInfo.url} target="_blank">Go to story</a>
+                        <Card.Subtitle>{`${storyInfo.description}`}</Card.Subtitle>
+                        <a href={storyInfo.url} target="_blank"  rel="noopener noreferrer">Go to story</a>
                     </Card.Body>
                 </Accordion.Collapse>
             </Card> 
