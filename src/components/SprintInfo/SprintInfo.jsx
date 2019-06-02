@@ -7,10 +7,19 @@ import ProjectMembershipUtil from '../../utils/ProjectMemberUtil';
 class SprintInfo extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            sprintNo: this.props.data.sprintData.sprint_no,
+            projectId: this.props.pid
+        }
         
         this.owners = ['MK', 'SE', 'KR', 'SIB'];
-
         this.assignOwnerStories = this.assignOwnerStories.bind(this);
+
+    }
+
+    componentDidMount() {
+        this.assignOwnerStories(this.state.projectId, this.state.sprintNo, this.owners);
     }
 
     assignOwnerStories(projectId, sprintNo, owners) {
@@ -23,31 +32,19 @@ class SprintInfo extends React.Component {
 
         Promise.all(pArr).then(owners => {
             this.setState({
-                owners: owners 
+                userStories: owners 
             })
         })
     
     }
 
-    componentWillReceiveProps(nextProps) {
-        let sprintNo = nextProps.data.sprintData.sprint_no;
-        let projectId = nextProps.pid;
-
-        this.assignOwnerStories(projectId, sprintNo, this.owners);
-        
-        this.setState({
-            sprintNo: nextProps.data.sprintData.sprint_no,
-            projectId: nextProps.pid
-        })
-        
-    }
 
     render() {
-        if (this.state == null) {
+        if (this.state == null || this.state.userStories == undefined) {
             return null;
         } else {
             return (
-                <SprintInfoTable owners={this.state.owners} />
+                <SprintInfoTable userStories={this.state.userStories} />
             )
         }
     }

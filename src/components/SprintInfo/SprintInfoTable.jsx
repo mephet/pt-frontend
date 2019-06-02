@@ -1,47 +1,52 @@
 import React from 'react';
-import {Accordion, Button, Card, ListGroup, Badge} from 'react-bootstrap';
+import {Accordion, Row, Card, Col, Container} from 'react-bootstrap';
+import SprintInfoItem from './SprintInfoItem';
 
 class SprintInfoTable extends React.Component{
     constructor(props) {
         super(props);
 
-        this.owners = null;
+        this.state = {
+            userStories: this.props.userStories
+        }
+        console.log(this.state.userStories);
     }
 
-    storyBadge({storyType}) {
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.owners = nextProps.owners
-      }
 
     render() {
-        if (this.owners == null ) {
+        if (this.state.userStories == null) {
             return null;
         } else {
             return (
                 <Accordion>
-                    {this.owners.map((owner, key) => {
+                    {this.state.userStories.map((owner, key) => {
                         return (
-                            <Card>
+                            <Card key={key}>
                                 <Accordion.Toggle as={Card.Header} eventKey={key}>
-                                    {owner.owner}
+                                    <Card>
+                                        <Card.Header as="h5">{owner.owner}</Card.Header>
+                                        <Card.Body>
+                                            <Container>
+                                                <Row>
+                                                    <Col>
+                                                    { owner.stories.total_points }
+                                                    </Col>
+                                                    <Col>
+                                                    { owner.stories.total_points_completed }
+                                                    </Col>
+                                                    <Col>
+                                                    `{ owner.stories.total_points } / { owner.stories.total_points_completed }`
+                                                    </Col>
+                                                </Row>
+                                            </Container>
+                                        </Card.Body>
+                                    </Card>
                                 </Accordion.Toggle>
                                 <Accordion.Collapse eventKey={key}>
                                     <Card.Body>
-                                        <ListGroup>
-                                            {owner.stories.stories.map(story => {
-                                                return (
-                                                    <ListGroup.Item>
-                                                        {story.name} &nbsp;
-                                                        <Badge variant="primary">
-                                                            { story.story_type}
-                                                        </Badge>
-                                                    </ListGroup.Item>
-                                                )
-                                            })}
-                                        </ListGroup>
+                                        {owner.stories.stories.map((story, idx) => {
+                                            return <SprintInfoItem storyInfo={story} idx={idx} key={idx} />
+                                        })}
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>

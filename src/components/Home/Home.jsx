@@ -8,23 +8,19 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      sprintData: props.data.sprintData,
+      sprintInfo: props.data.sprintInfo,
+      timeToRelease: 0,
+      timeToReview: 0,
+      timeToRelease: Math.floor((new Date(props.data.sprintData.release_date).getTime() - Date.now()) / 1000),
+      timeToReview: Math.floor((new Date(props.data.sprintData.review_date).getTime() - Date.now()) / 1000)
+    }
+
     this.startTimer = this.startTimer.bind(this);
     this.getCountdownString = this.getCountdownString.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-        sprintData: nextProps.data.sprintData,
-        sprintInfo: nextProps.data.sprintInfo,
-        timeToRelease: 0,
-        timeToReview: 0,
-        timeToRelease: Math.floor((new Date(nextProps.data.sprintData.release_date).getTime() - Date.now()) / 1000),
-        timeToReview: Math.floor((new Date(nextProps.data.sprintData.review_date).getTime() - Date.now()) / 1000)
-    })
-
     this.startTimer();
   }
-
 
   startTimer() {
     this.timer = setInterval(() => this.getCountdownString(), 1000)

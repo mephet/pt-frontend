@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Container, Row, Col, Form, FormGroup } from 'react-bootstrap';
-import Constants from '../../constants';
+import Constants from '../../constants/constants';
 import ConfigurationController from '../../controllers/ConfigurationController';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,32 +13,17 @@ class Configure extends React.Component {
 
         this.state = {
             modalShow: false,
-            sprintNo: this.props.sprintno,
-            isReleaseTaggingEnabled: false,
-            isReviewTaggingEnabled: false,
-            isFeatureTaggingEnabled: false,
-            isChoreTaggingEnabled: false,
-            isBugfixTaggingEnabled: false,
-            releaseDate: new Date(),
-            reviewDate: new Date()
+            sprintNo: this.props.data.sprintData.sprint_no,
+            projectId: this.props.pid,
+            isReleaseTaggingEnabled: this.props.data.isReleaseTaggingEnabled,
+            isReviewTaggingEnabled: this.props.data.isReviewTaggingEnabled,
+            isFeatureTaggingEnabled: this.props.data.isFeatureTaggingEnabled,
+            isChoreTaggingEnabled: this.props.data.isChoreTaggingEnabled,
+            isBugfixTaggingEnabled: this.props.data.isBugfixTaggingEnabled,
+            releaseDate: new Date(this.props.data.sprintData.release_date),
+            reviewDate: new Date(this.props.data.sprintData.review_date)
         }
     }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            sprintNo: nextProps.data.sprintData.sprint_no,
-            projectId: nextProps.pid,
-            isReleaseTaggingEnabled: nextProps.data.isReleaseTaggingEnabled,
-            isReviewTaggingEnabled: nextProps.data.isReviewTaggingEnabled,
-            isFeatureTaggingEnabled: nextProps.data.isFeatureTaggingEnabled,
-            isChoreTaggingEnabled: nextProps.data.isChoreTaggingEnabled,
-            isBugfixTaggingEnabled: nextProps.data.isBugfixTaggingEnabled,
-            releaseDate: new Date(nextProps.data.sprintData.release_date),
-            reviewDate: new Date(nextProps.data.sprintData.review_date)
-        })
-        
-    }
-
 
     handleReleaseDateSelection = (releaseDate) => {
         let date = new Date(releaseDate)

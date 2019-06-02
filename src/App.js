@@ -5,7 +5,7 @@ import { Tabs, Tab, Container } from 'react-bootstrap';
 import Home from './components/Home/Home';
 import JBHead from './components/JBHead/JBHead';
 import SprintInfo from './components/SprintInfo/SprintInfo';
-import Constants from './constants';
+import Constants from './constants/constants';
 import ApiHandler from './api/ApiHandler';
 
 class App extends React.Component {
@@ -15,26 +15,19 @@ class App extends React.Component {
     this.projectId = Constants.PROJECT_ID;
   }
 
-  componentDidMount() {
-    ConfigurationController.getLatestSprint(this.projectId).then(res => {
-      this.setState({
-        sprintData: res.data
-      })
-    });
-    ApiHandler.getProjectDetails(this.projectId).then(res => {
-      this.setState({
-        sprintInfo: res
-      })
+  async componentDidMount() {
+    const sprintDataRes = await ConfigurationController.getLatestSprint(this.projectId);
+    const sprintInfoRes = await ApiHandler.getProjectDetails(this.projectId);
+    const configRes = await ConfigurationController.getConfiguration(this.projectId);
+    this.setState({
+      sprintData: sprintDataRes.data,
+      sprintInfo: sprintInfoRes,
+      isReleaseTaggingEnabled: configRes.data.release_tagging,
+      isReviewTaggingEnabled: configRes.data.review_tagging,
+      isFeatureTaggingEnabled: configRes.data.feature_tagging,
+      isChoreTaggingEnabled: configRes.data.chore_tagging,
+      isBugfixTaggingEnabled: configRes.data.bugfix_tagging
     })
-    ConfigurationController.getConfiguration(this.projectId).then(res => {
-      this.setState({
-        isReleaseTaggingEnabled: res.data.release_tagging,
-        isReviewTaggingEnabled: res.data.review_tagging,
-        isFeatureTaggingEnabled: res.data.feature_tagging,
-        isChoreTaggingEnabled: res.data.chore_tagging,
-        isBugfixTaggingEnabled: res.data.bugfix_tagging
-      })
-    });
   }
 
   render() {
