@@ -17,9 +17,7 @@ function ReviewDetailsTable({stories}) {
                 {stories.map((story, idx) => {
                     return(
                         <tr key={idx}>
-                            <td>
-                                {story.id}
-                            </td>
+                            <td>{story.id}</td>
                             <td>
                                 <ReviewDetailsOwner ownerIds={story.owner_ids} />
                             </td>
