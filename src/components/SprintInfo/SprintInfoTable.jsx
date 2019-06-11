@@ -11,8 +11,6 @@ class SprintInfoTable extends React.Component{
         this.state = {
             userStories: this.props.userStories
         }
-
-        console.log(this.state.userStories);
     }
 
     percentageComplete(totalPoints, completedPoints) {

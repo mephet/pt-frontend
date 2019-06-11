@@ -5,8 +5,10 @@ import { Tabs, Tab, Container } from 'react-bootstrap';
 import Home from './components/Home/Home';
 import JBHead from './components/JBHead/JBHead';
 import SprintInfo from './components/SprintInfo/SprintInfo';
+import ReviewDetails from './components/ReviewDetails/ReviewDetails';
 import Constants from './constants/constants';
 import ApiHandler from './api/ApiHandler';
+
 
 class App extends React.Component {
 
@@ -46,6 +48,9 @@ class App extends React.Component {
             </Tab>
             <Tab eventKey="sprintinfo" title="Sprint Details">
               <SprintInfo pid={this.projectId} data={this.state} />
+            </Tab>
+            <Tab eventKey="reviewDetails" title="Sprint Review">
+              <ReviewDetails pid={this.projectId} data={this.state}/>
             </Tab>
           </Tabs>
         </Container>

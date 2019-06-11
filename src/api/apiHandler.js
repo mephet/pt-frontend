@@ -35,6 +35,22 @@ const ApiHandler = {
         });
     },
 
+    async getStoriesBySprint(projectId, sprintNo) {
+        let url = Constants.PT_ENDPOINT;
+        url += `/${projectId}/search?query=label:sprint${sprintNo}`;
+        return fetch(url, {
+            method: "GET",
+            headers: {
+                'X-TrackerToken': Constants.PT_API_TOKEN,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(json => {
+            return json
+        });
+    },
+
     async getProjectMembers(projectId) {
         let url = Constants.PT_ENDPOINT;
         url += `/${projectId}/memberships`;
