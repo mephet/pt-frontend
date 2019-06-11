@@ -8,6 +8,7 @@ import SprintInfo from './components/SprintInfo/SprintInfo';
 import ReviewDetails from './components/ReviewDetails/ReviewDetails';
 import Constants from './constants/constants';
 import ApiHandler from './api/ApiHandler';
+import Footer from './components/Footer/Footer';
 
 
 class App extends React.Component {
@@ -53,6 +54,9 @@ class App extends React.Component {
               <ReviewDetails pid={this.projectId} data={this.state}/>
             </Tab>
           </Tabs>
+          <br />
+          <br />
+          <Footer />
         </Container>
       );
     }
