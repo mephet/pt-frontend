@@ -1,9 +1,11 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Container } from 'react-bootstrap';
 import ReviewDetailsItem from './ReviewDetailsItem';
 import ReviewDetailsOwner from './ReviewDetailsOwner';
+import ReviewDetailsLabelBadge from './ReviewDetailsLabelBadge';
 
 function ReviewDetailsTable({stories}) {
+    console.log(stories);
     return (
         <Table>
             <thead>
@@ -11,6 +13,7 @@ function ReviewDetailsTable({stories}) {
                     <th>Story ID</th>
                     <th>Owner</th>
                     <th>Story Details</th>
+                    <th>Labels</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +26,16 @@ function ReviewDetailsTable({stories}) {
                             </td>
                             <td>
                                 <ReviewDetailsItem storyInfo={story} idx={idx}/>
+                            </td>
+                            <td>
+                                {story.labels.map((label, idx) => {
+                                    return (
+                                        <Container>
+                                            <ReviewDetailsLabelBadge key={idx} label={label} />
+                                            <br />
+                                        </Container>
+                                    )
+                                })}
                             </td>
                         </tr>
                     )
