@@ -7,6 +7,8 @@ const PTConstants = {
 
     "STORY_STATE": {
         "UNSTARTED": 'unstarted',
+        "PLANNED": 'planned',
+        "UNSCHEDULED": 'unscheduled',
         "STARTED": 'started',
         "FINISHED": 'finished',
         "DELIVERED": 'delivered',

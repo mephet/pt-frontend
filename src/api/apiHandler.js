@@ -37,7 +37,8 @@ const ApiHandler = {
 
     async getStoriesBySprint(projectId, sprintNo) {
         let url = Constants.PT_ENDPOINT;
-        url += `/${projectId}/search?query=label:sprint${sprintNo}`;
+        url += `/${projectId}/search?query=label:sprint${sprintNo}
+                +AND+includedone:true`;
         return fetch(url, {
             method: "GET",
             headers: {

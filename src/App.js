@@ -10,7 +10,6 @@ import Constants from './constants/constants';
 import ApiHandler from './api/ApiHandler';
 import Footer from './components/Footer/Footer';
 
-
 class App extends React.Component {
 
   constructor(props) {

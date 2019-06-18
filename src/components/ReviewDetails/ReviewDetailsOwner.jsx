@@ -1,6 +1,5 @@
 import React from 'react';
 import MembershipController from "../../controllers/MembershipController";
-import { Container } from 'react-bootstrap';
 
 class ReviewDetailsOwner extends React.Component {
     constructor(props) {

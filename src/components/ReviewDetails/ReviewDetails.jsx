@@ -3,7 +3,6 @@ import ApiHandler from '../../api/ApiHandler';
 import PTConstants from '../../constants/PTConstants';
 import { Container, Table } from 'react-bootstrap';
 import ReviewDetailsTable from './ReviewDetailsTable';
-import MembershipController from '../../controllers/MembershipController';
 
 class ReviewDetails extends React.Component {
     constructor(props) {
@@ -18,11 +17,14 @@ class ReviewDetails extends React.Component {
 
         this.getStoriesInCurrentSprint = this.getStoriesInCurrentSprint.bind(this)
     }
+    
 
     async componentDidMount() {
         let output = await this.getStoriesInCurrentSprint(this.state.projectId, this.state.sprintNo);
         const sList = output.stories.stories;
         
+        const unscheduled =  this.getStoriesByState(sList, PTConstants.STORY_STATE.UNSCHEDULED);
+        const planned =  this.getStoriesByState(sList, PTConstants.STORY_STATE.PLANNED);
         const unstarted = this.getStoriesByState(sList, PTConstants.STORY_STATE.UNSTARTED);
         const started = this.getStoriesByState(sList, PTConstants.STORY_STATE.STARTED);
         const finished = this.getStoriesByState(sList, PTConstants.STORY_STATE.FINISHED);
@@ -34,10 +36,20 @@ class ReviewDetails extends React.Component {
         const chores = this.getStoriesByStoryType(sList, PTConstants.STORY_TYPE.CHORE);
         const features = this.getStoriesByStoryType(sList, PTConstants.STORY_TYPE.FEATURE);
 
+        const completedD = features.filter(x => delivered.includes(x));
+        const completedA = features.filter(x => accepted.includes(x));
+        const completed =  [...new Set([...completedD, ...completedA])];
+
 
         this.setState({
-            completedStories: accepted,
+            completedStories: completed,
             totalStories: output,
+            unscheduledBugs: (bugs.filter(x => unscheduled.includes(x))).length,
+            unscheduledChores: (chores.filter(x => unscheduled.includes(x))).length,
+            unscheduledFeatures: (features.filter(x => unscheduled.includes(x))).length,
+            plannedBugs: (bugs.filter(x => planned.includes(x))).length,
+            plannedChores: (chores.filter(x => planned.includes(x))).length,
+            plannedFeatures: (features.filter(x => planned.includes(x))).length,
             unstartedBugs: (bugs.filter(x => unstarted.includes(x))).length,
             unstartedChores: (chores.filter(x => unstarted.includes(x))).length,
             unstartedFeatures: (features.filter(x => unstarted.includes(x))).length,
@@ -57,6 +69,7 @@ class ReviewDetails extends React.Component {
             rejectedChores: (chores.filter(x => rejected.includes(x))).length,
             rejectedFeatures: (features.filter(x => rejected.includes(x))).length,
         })
+        console.log(accepted);
         console.log(this.state);
     }
 
@@ -75,8 +88,10 @@ class ReviewDetails extends React.Component {
 
 
     async getStoriesInCurrentSprint(projectId, sprintNo) {
-        return await ApiHandler.getStoriesBySprint(projectId, sprintNo);
+        let output = await ApiHandler.getStoriesBySprint(projectId, sprintNo);
+        return output;
     }
+
 
     render() {
         if (this.state.completedStories === null || this.state.totalStories === null) {
@@ -90,6 +105,8 @@ class ReviewDetails extends React.Component {
                     <Table>
                         <thead>
                             <th>Type</th>
+                            <th>Unscheduled</th>
+                            <th>Planned</th>
                             <th>Unstarted</th>
                             <th>Started</th>
                             <th>Finished</th>
@@ -100,6 +117,8 @@ class ReviewDetails extends React.Component {
                         <tbody>
                             <tr>
                                 <td>Feature</td>
+                                <td>{this.state.unscheduledFeatures}</td>
+                                <td>{this.state.plannedFeatures}</td>
                                 <td>{this.state.unstartedFeatures}</td>
                                 <td>{this.state.startedFeatures}</td>
                                 <td>{this.state.finishedFeatures}</td>
@@ -109,6 +128,8 @@ class ReviewDetails extends React.Component {
                             </tr>
                             <tr>
                                 <td>Chore</td>
+                                <td>{this.state.unscheduledChores}</td>
+                                <td>{this.state.plannedChores}</td>
                                 <td>{this.state.unstartedChores}</td>
                                 <td>{this.state.startedChores}</td>
                                 <td>{this.state.finishedChores}</td>
@@ -118,6 +139,8 @@ class ReviewDetails extends React.Component {
                             </tr>
                             <tr>
                                 <td>Bugs</td>
+                                <td>{this.state.unscheduledBugs}</td>
+                                <td>{this.state.plannedBugs}</td>
                                 <td>{this.state.unstartedBugs}</td>
                                 <td>{this.state.startedBugs}</td>
                                 <td>{this.state.finishedBugs}</td>
