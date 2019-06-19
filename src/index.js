@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import Redirector from './components/Redirect/Redirector';
 
 ReactDOM.render(
-    <App />, 
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={ Redirector} />
+      <Route exact path="/sprint/:sprintno" component={ App } />
+    </Switch>
+      
+      
+  </BrowserRouter>,
   document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

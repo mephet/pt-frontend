@@ -12,7 +12,7 @@ class SprintInfo extends React.Component {
             projectId: this.props.pid
         }
         
-        this.owners = ['MK', 'SE', 'KR', 'SIB'];
+        this.owners = ['MK', 'SE', 'KR', 'SIB', 'GBK'];
         this.assignOwnerStories = this.assignOwnerStories.bind(this);
 
     }

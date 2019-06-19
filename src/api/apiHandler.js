@@ -21,7 +21,8 @@ const ApiHandler = {
 
         let url = Constants.PT_ENDPOINT;
         url += `/${projectId}/search?query=label:sprint${sprintNo}
-                +AND+owner:${ownerName}`;
+                +AND+owner:${ownerName}
+                +AND+includedone:true`;
         return fetch(url, {
             method: "GET",
             headers: {
