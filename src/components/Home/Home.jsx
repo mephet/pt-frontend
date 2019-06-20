@@ -56,7 +56,7 @@ class Home extends Component {
                 <Card className="sprint-card" bg="success" text="white" style={{ width: '16rem'}}>
                   <Card.Body>
                     <Card.Text>
-                      Sprint { this.state.sprintInfo.current_iteration_number }
+                      Sprint { this.state.sprintData.sprint_no }
                     </Card.Text>
                   </Card.Body>
                 </Card>

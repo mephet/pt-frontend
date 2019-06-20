@@ -15,10 +15,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.projectId = Constants.PROJECT_ID;
+    this.sprintNo = this.props.match.params.sprintno;
   }
 
   async componentDidMount() {
-    const sprintDataRes = await ConfigurationController.getLatestSprint(this.projectId);
+    const sprintDataRes = await ConfigurationController.getSprintBySprintNo(this.projectId, this.sprintNo);
     const sprintInfoRes = await ApiHandler.getProjectDetails(this.projectId);
     const configRes = await ConfigurationController.getConfiguration(this.projectId);
     this.setState({

@@ -43,6 +43,22 @@ const ConfigurationController = {
         .then(json => {
             return json;
         });
+    },
+
+    getSprintBySprintNo(projectId, sprintNo) {
+        let url = Constants.ENDPOINT;
+        url += `/getsprint/project/${projectId}/sprint/${sprintNo}`;
+        console.log(url);
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(json => {
+            return json;
+        });
     }
 }
 
