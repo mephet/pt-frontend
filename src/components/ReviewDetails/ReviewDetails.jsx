@@ -104,15 +104,17 @@ class ReviewDetails extends React.Component {
                     <br />
                     <Table>
                         <thead>
-                            <th>Type</th>
-                            <th>Unscheduled</th>
-                            <th>Planned</th>
-                            <th>Unstarted</th>
-                            <th>Started</th>
-                            <th>Finished</th>
-                            <th>Delivered</th>
-                            <th>Accepted</th>
-                            <th>Rejected</th>
+                            <tr>
+                                <th>Type</th>
+                                <th>Unscheduled</th>
+                                <th>Planned</th>
+                                <th>Unstarted</th>
+                                <th>Started</th>
+                                <th>Finished</th>
+                                <th>Delivered</th>
+                                <th>Accepted</th>
+                                <th>Rejected</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Row, Col, Container } from 'react-bootstrap';
 import TimerUtil from '../../utils/TimerUtil';
 import './Home.css';
+import HomeTimeline from './HomeTimeline';
 
 class Home extends Component {
 
@@ -144,6 +145,11 @@ class Home extends Component {
                 </Card>
               </Col>
             </Row>
+            <br />
+            <br />
+            <br />
+            <br />
+            <HomeTimeline data={this.state} />
           </Container>
       );
     }
