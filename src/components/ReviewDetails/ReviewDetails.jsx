@@ -69,8 +69,6 @@ class ReviewDetails extends React.Component {
             rejectedChores: (chores.filter(x => rejected.includes(x))).length,
             rejectedFeatures: (features.filter(x => rejected.includes(x))).length,
         })
-        console.log(accepted);
-        console.log(this.state);
     }
 
 

@@ -8,12 +8,25 @@ const ProjectMembershipUtil = {
             return member.person.id === memberId;
         })
 
-        console.log(m);
+        return m;
     },
 
-    async getAllStoryOwnersInSprint(projectId, sprintNo) {
-        const { stories } = await ApiHandler.getStoriesBySprintAndUser(projectId, sprintNo);
+    async getPersonsInSprint(projectId, sprintNo) {
+        const { stories } = await ApiHandler.getStoriesBySprint(projectId, sprintNo);
         console.log(stories);
+        let owners = stories.stories.flatMap(story => {
+            return story.owner_ids
+        })
+        let membersPromise = owners.map(async owner => {
+            return await this.getStoryOwner(projectId, owner);
+        });
+        let members = await Promise.all(membersPromise);
+        members = members.flat();
+        let personsInfo = members.map(member => {
+            return {initials: member.person.initials, name: member.person.name};
+        })
+        personsInfo = [...new Set(personsInfo)];
+        return personsInfo;
     }
 }
 

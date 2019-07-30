@@ -24,8 +24,7 @@ class HomeTimeline extends React.Component {
            developmentPercentage: developmentPercentage * 100,
            deploymentPercentage: deploymentPercentage * 100
         }
-        
-        console.log(this.state);
+
     }
 
     render() {

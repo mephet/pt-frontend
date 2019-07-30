@@ -12,9 +12,10 @@ class SprintInfo extends React.Component {
             projectId: this.props.pid
         }
         
-        this.owners = ['MK', 'SE', 'KR', 'SIB', 'GBK'];
+        // this.owners = ['MK', 'SE', 'KR', 'SIB', 'GBK'];
+        this.owners = this.props.persons;
+        console.log(this.owners);
         this.assignOwnerStories = this.assignOwnerStories.bind(this);
-
     }
 
     componentDidMount() {
@@ -23,16 +24,18 @@ class SprintInfo extends React.Component {
 
     assignOwnerStories(projectId, sprintNo, owners) {
         let pArr = owners.map(owner => {
-            return ApiHandler.getStoriesBySprintAndUser(projectId, sprintNo, owner)
+            return ApiHandler.getStoriesBySprintAndUser(projectId, sprintNo, owner.initials)
                 .then(stories => {
-                    return {owner: owner, stories: stories.stories};
+                    console.log({owner: owner.name, stories: stories.stories});
+                    return {owner: owner.name, stories: stories.stories};
                 });
         })
 
         Promise.all(pArr).then(owners => {
             this.setState({
-                userStories: owners 
+                userStories: owners
             })
+            console.log(this.state.userStories);
         })
     
     }

@@ -9,6 +9,7 @@ import ReviewDetails from './components/ReviewDetails/ReviewDetails';
 import Constants from './constants/constants';
 import ApiHandler from './api/ApiHandler';
 import Footer from './components/Footer/Footer';
+import ProjectMembershipUtil from './utils/ProjectMemberUtil';
 
 class App extends React.Component {
 
@@ -22,6 +23,7 @@ class App extends React.Component {
     const sprintDataRes = await ConfigurationController.getSprintBySprintNo(this.projectId, this.sprintNo);
     const sprintInfoRes = await ApiHandler.getProjectDetails(this.projectId);
     const configRes = await ConfigurationController.getConfiguration(this.projectId);
+    const personsInfo = await ProjectMembershipUtil.getPersonsInSprint(this.projectId, this.sprintNo);
     this.setState({
       sprintData: sprintDataRes.data,
       sprintInfo: sprintInfoRes,
@@ -29,7 +31,8 @@ class App extends React.Component {
       isReviewTaggingEnabled: configRes.data.review_tagging,
       isFeatureTaggingEnabled: configRes.data.feature_tagging,
       isChoreTaggingEnabled: configRes.data.chore_tagging,
-      isBugfixTaggingEnabled: configRes.data.bugfix_tagging
+      isBugfixTaggingEnabled: configRes.data.bugfix_tagging,
+      personsInfo: personsInfo
     })
   }
 
@@ -48,7 +51,7 @@ class App extends React.Component {
               <Configure pid={this.projectId} data={this.state}/>
             </Tab>
             <Tab eventKey="sprintinfo" title="Sprint Details">
-              <SprintInfo pid={this.projectId} data={this.state} />
+              <SprintInfo pid={this.projectId} data={this.state} persons={this.state.personsInfo} />
             </Tab>
             <Tab eventKey="reviewDetails" title="Sprint Review">
               <ReviewDetails pid={this.projectId} data={this.state}/>
