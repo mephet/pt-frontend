@@ -14,7 +14,6 @@ class SprintInfo extends React.Component {
         
         // this.owners = ['MK', 'SE', 'KR', 'SIB', 'GBK'];
         this.owners = this.props.persons;
-        console.log(this.owners);
         this.assignOwnerStories = this.assignOwnerStories.bind(this);
     }
 
@@ -26,7 +25,6 @@ class SprintInfo extends React.Component {
         let pArr = owners.map(owner => {
             return ApiHandler.getStoriesBySprintAndUser(projectId, sprintNo, owner.initials)
                 .then(stories => {
-                    console.log({owner: owner.name, stories: stories.stories});
                     return {owner: owner.name, stories: stories.stories};
                 });
         })
@@ -35,7 +33,6 @@ class SprintInfo extends React.Component {
             this.setState({
                 userStories: owners
             })
-            console.log(this.state.userStories);
         })
     
     }

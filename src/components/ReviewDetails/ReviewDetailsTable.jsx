@@ -5,7 +5,6 @@ import ReviewDetailsOwner from './ReviewDetailsOwner';
 import ReviewDetailsLabelBadge from './ReviewDetailsLabelBadge';
 
 function ReviewDetailsTable({stories}) {
-    console.log(stories);
     return (
         <Table>
             <thead>

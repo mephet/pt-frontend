@@ -13,7 +13,6 @@ const ProjectMembershipUtil = {
 
     async getPersonsInSprint(projectId, sprintNo) {
         const { stories } = await ApiHandler.getStoriesBySprint(projectId, sprintNo);
-        console.log(stories);
         let owners = stories.stories.flatMap(story => {
             return story.owner_ids
         })

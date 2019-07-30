@@ -56,7 +56,6 @@ const ApiHandler = {
     async getProjectMembers(projectId) {
         let url = Constants.PT_ENDPOINT;
         url += `/${projectId}/memberships`;
-        console.log(url);
         return fetch(url, {
             method: "GET",
             headers: {
